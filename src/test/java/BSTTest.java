@@ -162,6 +162,33 @@ public class BSTTest {
     }
 
     @Test
+    public void deleteNodeWithOneChildTest(){
+        BST bst = new BST();
+
+        bst.insert(7);
+        assertEquals(bst.getRoot(), bst.findNode(7));
+        assertEquals(bst.getRoot().parent, null );
+        assertEquals(bst.getRoot().left, null );
+        assertEquals(bst.getRoot().right, null );
+        bst.insert(3);
+        assertEquals(bst.getRoot().left, bst.findNode(3));
+        assertEquals(bst.getRoot().right, null );
+        bst.delete(3);
+        assertEquals(bst.getRoot(), bst.findNode(7));
+        assertEquals(bst.getRoot().parent, null );
+        assertEquals(bst.getRoot().left, null );
+        assertEquals(bst.getRoot().right, null );
+        bst.insert(15);
+        assertEquals(bst.getRoot().right, bst.findNode(15));
+        assertEquals(bst.getRoot().left, null );
+        bst.delete(15);
+        assertEquals(bst.getRoot(), bst.findNode(7));
+        assertEquals(bst.getRoot().parent, null );
+        assertEquals(bst.getRoot().left, null );
+        assertEquals(bst.getRoot().right, null );
+    }
+
+    @Test
     public void deleteNodeWithBothChildrenTest(){
         BST bst = builtExampleBST();
 
