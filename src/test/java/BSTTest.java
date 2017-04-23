@@ -208,6 +208,38 @@ public class BSTTest {
     }
 
     @Test
+    public void deleteRootTest(){
+        BST bst = builtExampleBST();
+
+        bst.delete(21);
+        assertEquals(bst.findNode(21), null);
+        assertEquals(bst.getRoot(), bst.findNode(23));
+        assertEquals(bst.findNode(23).left, bst.findNode(13));
+        assertEquals(bst.findNode(23).parent, null);
+        assertEquals(bst.findNode(23).right, bst.findNode(64));
+        assertEquals(bst.findNode(64).left, bst.findNode(25));
+        assertEquals(bst.findNode(25).parent, bst.findNode(64));
+        assertEquals(bst.findNode(64).parent, bst.findNode(23));
+        assertEquals(bst.findNode(13).parent, bst.findNode(23));
+
+        bst.delete(23);
+        assertEquals(bst.findNode(23), null);
+        assertEquals(bst.getRoot(), bst.findNode(24));
+        assertEquals(bst.findNode(24).left, bst.findNode(13));
+        assertEquals(bst.findNode(24).parent, null);
+        assertEquals(bst.findNode(24).right, bst.findNode(64));
+        assertEquals(bst.findNode(64).left, bst.findNode(25));
+        assertEquals(bst.findNode(25).parent, bst.findNode(64));
+        assertEquals(bst.findNode(25).left, null);
+        assertEquals(bst.findNode(64).parent, bst.findNode(24));
+        assertEquals(bst.findNode(13).parent, bst.findNode(24));
+
+
+    }
+
+
+
+    @Test
     public void findTest(){
         BST bst = builtExampleBST();
         assertEquals(bst.find(-10), 1);

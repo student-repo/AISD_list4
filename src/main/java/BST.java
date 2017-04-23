@@ -52,8 +52,30 @@ public class BST {
 
 
     public Node getMinNode(){
-        return getMinN(root);
+        if(root != null){
+            return getMinN(root);
+        }
+        return null;
     }
+
+    public void min(){
+        if(getMinNode() == null){
+            System.out.println();
+        }
+        else{
+            System.out.println(getMinNode().data);
+        }
+    }
+
+    public void max(){
+        if(getMaxNode() == null){
+            System.out.println();
+        }
+        else{
+            System.out.println(getMaxNode().data);
+        }
+    }
+
 
     private Node getMinN(Node node){
         if(node.left == null){
@@ -63,7 +85,10 @@ public class BST {
     }
 
     public Node getMaxNode(){
-        return getMaxN(root);
+        if(root != null){
+            return getMaxN(root);
+        }
+        return null;
     }
 
     private Node getMaxN(Node node){
@@ -119,6 +144,9 @@ public class BST {
 
     void delete(int key) {
         Node toDelete = findNode(key);
+        if(toDelete == null){
+            return;
+        }
 
         Node temporary;
         if(toDelete.right == null && toDelete.left == null){
@@ -130,71 +158,58 @@ public class BST {
             }
         }
         else if(toDelete.right == null){
-            setNewChildToParent(toDelete.parent, toDelete.left, key);
-            toDelete.left.parent = toDelete.parent;
+            if(toDelete == root){
+                setRoot(toDelete.left);
+            }
+            else {
+                setNewChildToParent(toDelete.parent, toDelete.left, key);
+                toDelete.left.parent = toDelete.parent;
+            }
         }
         else if(toDelete.left == null){
-            setNewChildToParent(toDelete.parent, toDelete.right, key);
-            toDelete.right.parent = toDelete.parent;
+            if(toDelete == root){
+                setRoot(toDelete.right);
+            }
+            else {
+                setNewChildToParent(toDelete.parent, toDelete.right, key);
+                toDelete.right.parent = toDelete.parent;
+            }
         }
-//        else{
-//            temporary = getMinN(toDelete.right);
-//            setNewChildToParent(temporary.parent, temporary.right, temporary.data);
-//            temporary.parent = toDelete.parent;
-//            temporary.right = toDelete.right;
-//            temporary.left = toDelete.left;
-//            setNewChildToParent(toDelete.parent, temporary, key);
-//            if(toDelete.left != null){
-//                toDelete.left.parent = temporary;
-//            }
-//            if(toDelete.right != null){
-//                toDelete.right.parent = temporary;
-//            }
-//        }
         else{
             temporary = getMinN(toDelete.right);
             setNewChildToParent(temporary.parent, temporary.right, temporary.data);
             if(toDelete == root){
-                temporary.parent = null;
                 setRoot(temporary);
+                if(temporary.left != null){
+                    temporary.left.parent = temporary.parent;
+                }
+                if(temporary.right != null){
+                    temporary.right.parent = temporary.parent;
+                }
+
+                if(toDelete.left != null){
+                    toDelete.left.parent = temporary;
+                }
+                if(toDelete.right != null){
+                    toDelete.right.parent = temporary;
+                }
+
+                temporary.parent = null;
             }
             else{
                 temporary.parent = toDelete.parent;
                 setNewChildToParent(toDelete.parent, temporary, key);
+                if(toDelete.left != null){
+                    toDelete.left.parent = temporary;
+                }
+                if(toDelete.right != null){
+                    toDelete.right.parent = temporary;
+                }
             }
             temporary.right = toDelete.right;
             temporary.left = toDelete.left;
-            if(toDelete.left != null){
-                toDelete.left.parent = temporary;
-            }
-            if(toDelete.right != null){
-                toDelete.right.parent = temporary;
-            }
         }
     }
-
-//    else{
-//        temporary = getMinN(toDelete.right);
-//        if(toDelete == root){
-//            temporary.parent = null;
-//            setRoot(temporary);
-//        }
-//        else{
-//            temporary.parent = toDelete.parent;
-//            setNewChildToParent(toDelete.parent, temporary, key);
-//        }
-//        setNewChildToParent(temporary.parent, temporary.right, temporary.data);
-//        temporary.right = toDelete.right;
-//        temporary.left = toDelete.left;
-//        if(toDelete.left != null){
-//            toDelete.left.parent = temporary;
-//        }
-//        if(toDelete.right != null){
-//            toDelete.right.parent = temporary;
-//        }
-//    }
-
-
 
 
 
@@ -223,7 +238,9 @@ public class BST {
         bst.insert(67);
         bst.insert(8);
 
+
         bst.delete(21);
+        bst.delete(23);
 //        bst.delete(13);
 //        System.out.println(root.data);
 //        System.out.println(root.right.data);
@@ -236,7 +253,24 @@ public class BST {
         System.out.println(bst.getMaxNode().data);
         bst.inorder();
 
-        System.out.println(bst.findNode(120).parent.data);
+        System.out.println(bst.findNode(64).parent.data);
+//        bst.insert(1);
+//        bst.insert(2);
+//        bst.insert(3);
+//        bst.min();
+//        bst.max();
+//        bst.inorder();
+//        bst.delete(3);
+//        bst.insert(4);
+//        bst.max();
+//        System.out.println(bst.find(2));
+//        bst.delete(1);
+//        bst.delete(2);
+//        bst.delete(3);
+//        bst.delete(4);
+//        bst.min();
+//        bst.insert(1000);
+//        bst.max();
 
     }
 
