@@ -1,11 +1,5 @@
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class BST {
 
@@ -129,17 +123,17 @@ public class BST {
             return null;
         }
         if(node.data == key) {
-            incrementComparisonNumber();
+//            incrementComparisonNumber();
             return node;
         }
         else if(node.data > key){
-            incrementComparisonNumber();
-            incrementComparisonNumber();
+//            incrementComparisonNumber();
+//            incrementComparisonNumber();
             return findN(node.left, key);
         }
         else{
-            incrementComparisonNumber();
-            incrementComparisonNumber();
+//            incrementComparisonNumber();
+//            incrementComparisonNumber();
             return findN(node.right, key);
         }
     }
@@ -287,150 +281,6 @@ public class BST {
 
 
 
-    public static void main(String[] args){
-
-//        int treeHeight = 2;
-//        int[] arr = getTreeValues(treeHeight);
-//        int n = arr.length;
-//
-//        BST balancedBST = new BST(sortedArrayToBalancedBST(arr));
-//        BST notBalancedBST = new BST(sortedArrayToNotBalancedBST(arr));
-//        BST randomBST = getRandomBSTFromArray(treeHeight);
-//
-//        for(int i = 0; i < 1000; i++ ){
-//            int randNum = ThreadLocalRandom.current().nextInt(0, n);
-//            int balancedBSTComparisonNumber;
-//            int notBalancedBSTComparisonNumber;
-//            int randomBSTComparisonNumber;
-//
-//            balancedBST.findNode(randNum);
-//            balancedBSTComparisonNumber = balancedBST.getComparisonNumber();
-//            balancedBST.setComparisonNumber(0);
-//
-//            notBalancedBST.findNode(randNum);
-//            notBalancedBSTComparisonNumber = notBalancedBST.getComparisonNumber();
-//            notBalancedBST.setComparisonNumber(0);
-//
-//            randomBST = getRandomBSTFromArray(treeHeight);
-//            randomBSTComparisonNumber = randomBST.getComparisonNumber();
-//            randomBST.setComparisonNumber(0);
-//
-//        }
-//
-//
-//
-//
-//
-//        balancedBST.displayTree();
-//        System.out.println(balancedBST.checkBST());
-//        System.out.println();
-//        System.out.println();
-//
-//        notBalancedBST.displayTree();
-//        System.out.println(notBalancedBST .checkBST());
-//        System.out.println();
-//        System.out.println();
-//
-//        randomBST.displayTree();
-//        System.out.println(randomBST.checkBST());
-//        System.out.println();
-//        System.out.println();
-
-
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream("./src/main/java/filename.txt"), "utf-8"))) {
-            writer.write("something");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-//        Node foo = bst.buildBallancedTree(getTreeValues(3), 0, binarySum(3) -1, null);
-//        Node foo = bst.sortedArrayToBST(getTreeValues(3));
-
-//        try {
-//            try (Stream<String> stream = Files.lines(Paths.get("./src/main/java/config2"))) {
-//                stream.forEach(item -> bst.handleIntput(bst, item));
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
-
-
-    }
-
-    private static int binarySum(int treeHeight){
-        int k = 0;
-        for(int j = 0; j <= treeHeight; j ++ ){
-            k += Math.pow(2, j);
-        }
-        return k;
-    }
-
-    private static int[] getTreeValues(int treeHeight){
-        return IntStream.range(0, binarySum(treeHeight)).toArray();
-    }
-
-
-
-    public static Node sortedArrayToNotBalancedBST(int[] a){
-        return sortedArrayToNotBalancedBST(a, 0, null);
-    }
-
-
-    private static BST getRandomBSTFromArray(int treeHeight){
-        List<Integer> arr = Arrays.stream(getTreeValues(treeHeight))
-                .boxed()
-                .collect(Collectors.toList());
-        BST bst = new BST();
-
-        while (arr.size() != 0){
-            int randNum = ThreadLocalRandom.current().nextInt(0, arr.size());
-            bst.insert((Integer) arr.get(randNum));
-            arr.remove(randNum);
-        }
-        return bst;
-    }
-
-    private static Node sortedArrayToNotBalancedBST(int[] a, int i, Node parent){
-        if(i >= a.length){
-            return null;
-        }
-        Node root = new Node(a[i]);
-        root.parent = parent;
-        root.left = null;
-            root.right = sortedArrayToNotBalancedBST(a, i + 1, root);
-        return root;
-    }
-
-
-    public static Node sortedArrayToBalancedBST(int[] num) {
-        if (num.length == 0)
-            return null;
-
-        return sortedArrayToBalancedBST(num, 0, num.length - 1, null);
-    }
-
-    private static Node sortedArrayToBalancedBST(int[] num, int start, int end, Node parent) {
-        if (start > end)
-            return null;
-
-        int mid = (start + end) / 2;
-        Node root = new Node(num[mid]);
-        root.parent = parent;
-        root.left = sortedArrayToBalancedBST(num, start, mid - 1, root);
-        root.right = sortedArrayToBalancedBST(num, mid + 1, end, root);
-
-        return root;
-    }
 
 
     void handleIntput(BST bst, String s){
