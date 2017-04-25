@@ -12,23 +12,34 @@ public class BSTTest {
 
         assertEquals(bst.findNode(21).data, 21);
 
+        assertEquals(bst.checkBST(), true);
+
         assertEquals(bst.findNode(13).data, 13);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(2).data, 2);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(3).data, 3);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(1).data, 1);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(-10).data, -10);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(64).data, 64);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(23).data, 23);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(25).data, 25);
+        assertEquals(bst.checkBST(), true);
 
         assertEquals(bst.findNode(24).data, 24);
+        assertEquals(bst.checkBST(), true);
     }
 
 
@@ -39,6 +50,7 @@ public class BSTTest {
         BST bst = builtExampleBST();
 
         assertEquals(bst.findNode(21).data, 21);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(21).parent, null);
         assertEquals(bst.findNode(21).left, bst.getRoot().left);
         assertEquals(bst.findNode(21).right, bst.getRoot().right);
@@ -124,7 +136,9 @@ public class BSTTest {
     @Test
     public void deleteNodeWithoutChildrenTest(){
         BST bst = builtExampleBST();
+        assertEquals(bst.checkBST(), true);
         bst.delete(-5);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(-5), null);
     }
 
@@ -132,6 +146,7 @@ public class BSTTest {
     public void deleteRootWithoutChildren(){
         BST bst = new BST();
         bst.insert(5);
+        assertEquals(bst.checkBST(), true);
         bst.delete(5);
         assertEquals(bst.getRoot(), null);
     }
@@ -140,7 +155,9 @@ public class BSTTest {
     public void deleteNodeWithoutLeftChildTest(){
         BST bst = builtExampleBST();
 
+        assertEquals(bst.checkBST(), true);
         bst.delete(23);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(23), null);
         assertEquals(bst.findNode(64).left, bst.findNode(25));
         assertEquals(bst.findNode(25).left, bst.findNode(24));
@@ -154,7 +171,9 @@ public class BSTTest {
     public void deleteNodeWithoutRightChildTest(){
         BST bst = builtExampleBST();
 
+        assertEquals(bst.checkBST(), true);
         bst.delete(1);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(1), null);
         assertEquals(bst.findNode(2).left, bst.findNode(-10));
         assertEquals(bst.findNode(2).right, bst.findNode(3));
@@ -165,23 +184,29 @@ public class BSTTest {
     public void deleteNodeWithOneChildTest(){
         BST bst = new BST();
 
+
         bst.insert(7);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.getRoot(), bst.findNode(7));
         assertEquals(bst.getRoot().parent, null );
         assertEquals(bst.getRoot().left, null );
         assertEquals(bst.getRoot().right, null );
         bst.insert(3);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.getRoot().left, bst.findNode(3));
         assertEquals(bst.getRoot().right, null );
         bst.delete(3);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.getRoot(), bst.findNode(7));
         assertEquals(bst.getRoot().parent, null );
         assertEquals(bst.getRoot().left, null );
         assertEquals(bst.getRoot().right, null );
         bst.insert(15);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.getRoot().right, bst.findNode(15));
         assertEquals(bst.getRoot().left, null );
         bst.delete(15);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.getRoot(), bst.findNode(7));
         assertEquals(bst.getRoot().parent, null );
         assertEquals(bst.getRoot().left, null );
@@ -192,7 +217,9 @@ public class BSTTest {
     public void deleteNodeWithBothChildrenTest(){
         BST bst = builtExampleBST();
 
+        assertEquals(bst.checkBST(), true);
         bst.delete(2);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(2), null);
         assertEquals(bst.findNode(3).left, bst.findNode(1));
         assertEquals(bst.findNode(3).right, null);
@@ -201,7 +228,9 @@ public class BSTTest {
         assertEquals(bst.findNode(13).left, bst.findNode(3));
 
         bst = builtExampleBST();
+        assertEquals(bst.checkBST(), true);
         bst.delete(100);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(100), null);
         assertEquals(bst.findNode(64).right, bst.findNode(115));
         assertEquals(bst.findNode(64).left, bst.findNode(23));
@@ -214,6 +243,7 @@ public class BSTTest {
 
         bst = builtExampleBST();
         bst.delete(120);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(120), null);
         assertEquals(bst.findNode(130).left, bst.findNode(115));
         assertEquals(bst.findNode(130).right, null);
@@ -222,6 +252,7 @@ public class BSTTest {
 
         bst = builtExampleBST();
         bst.delete(13);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(13), bst.getRoot().left);
         assertEquals(bst.findNode(13).left, bst.findNode(2));
         assertEquals(bst.findNode(13).right, bst.getRoot().left.right);
@@ -229,6 +260,7 @@ public class BSTTest {
         assertEquals(bst.findNode(13), bst.findNode(13).right.parent);
         assertEquals(bst.findNode(21).left, bst.findNode(13));
         bst.delete(13);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(13), bst.getRoot().left);
         assertEquals(bst.findNode(13).left, bst.findNode(2));
         assertEquals(bst.findNode(13).right, bst.getRoot().left.right);
@@ -239,6 +271,7 @@ public class BSTTest {
         BST bst = builtExampleBST();
 
         bst.delete(21);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(21), null);
         assertEquals(bst.getRoot(), bst.findNode(23));
         assertEquals(bst.findNode(23).left, bst.findNode(13));
@@ -250,6 +283,7 @@ public class BSTTest {
         assertEquals(bst.findNode(13).parent, bst.findNode(23));
 
         bst.delete(23);
+        assertEquals(bst.checkBST(), true);
         assertEquals(bst.findNode(23), null);
         assertEquals(bst.getRoot(), bst.findNode(24));
         assertEquals(bst.findNode(24).left, bst.findNode(13));
@@ -280,6 +314,57 @@ public class BSTTest {
         assertEquals(bst.find(6), 0);
         assertEquals(bst.find(7), 0);
         assertEquals(bst.find(99), 0);
+    }
+
+    @Test
+    public void insertTest(){
+        BST bst = new BST();
+        assertEquals(bst.checkBST(), true);
+
+
+        assertEquals(bst.checkBST(), true);
+        bst.insert(21);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(13);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(64);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(23);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(2);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(3);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(13);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(1);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(25);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(-10);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(-5);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(-20);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(24);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(13);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(100);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(120);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(130);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(115);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(75);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(67);
+        assertEquals(bst.checkBST(), true);
+        bst.insert(87);
+        assertEquals(bst.checkBST(), true);
     }
 
     private BST builtExampleBST(){

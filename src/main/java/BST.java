@@ -1,6 +1,10 @@
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Stack;
 import java.util.jar.Pack200;
+import java.util.stream.Stream;
 
 public class BST {
 
@@ -117,8 +121,10 @@ public class BST {
 
     public int find(int key){
         if(findNode(key) == null) {
+            System.out.println(0);
             return 0;
         }
+        System.out.println(1);
         return 1;
     }
 
@@ -194,7 +200,6 @@ public class BST {
     private void handleDeleteRoot() {
         if(root.left == null && root.right == null){
             setRoot(null);
-            return;
         }
         else if(root.right == null){
             root.left.parent = null;
@@ -204,7 +209,9 @@ public class BST {
             Node temporary = getMinN(root.right);
             if(temporary == root.right){
                 temporary.left = root.left;
-                root.left.parent = temporary;
+                if(root.left != null){
+                    root.left.parent = temporary;
+                }
                 temporary.parent = null;
                 setRoot(temporary);
             }
@@ -221,6 +228,36 @@ public class BST {
                 setRoot(temporary);
             }
         }
+    }
+    boolean checkBST(){
+        if (root == null){
+            return true;
+        }
+        return checkBST(root);
+    }
+
+    private boolean checkBST(Node node){
+        if(node.left == null && node.right == null){
+            return true;
+        }
+        if(node.left != null){
+            if(node.data <= node.left.data || node != node.left.parent){
+                return false;
+            }
+        }
+        if(node.right != null){
+            if(node.data > node.right.data || node != node.right.parent){
+                return false;
+            }
+        }
+        if(node.left != null && node.right != null){
+            return checkBST(node.left) && checkBST(node.right);
+        }
+        if(node.left != null){
+            return checkBST(node.left);
+        }
+            return checkBST(node.right);
+
     }
 
 
@@ -253,8 +290,8 @@ public class BST {
         bst.insert(117);
 
 
-        bst.delete(21);
-        bst.delete(23);
+//        bst.delete(21);
+//        bst.delete(23);
 //        bst.delete(21);
 //        bst.delete(23);
 //        bst.delete(13);
@@ -287,9 +324,57 @@ public class BST {
 //        bst.min();
 //        bst.insert(1000);
 //        bst.max();
+//        bst.displayTree();
+
+        System.out.println();
+        System.out.println();
+        System.out.println(bst.checkBST());
+        System.out.println();
+        System.out.println();
+
+
+
+        try {
+            try (Stream<String> stream = Files.lines(Paths.get("./src/main/java/config"))) {
+                stream.forEach(item -> bst.handleIntput(bst, item));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
+
+    void handleIntput(BST bst, String s){
+        if(s.equals("max")){
+            bst.max();
+//            System.out.println("MAX");
+        }
+        else if(s.equals("min")){
+            bst.min();
+//            System.out.println("MIN");
+        }
+        else if(s.equals("inorder")){
+            bst.inorder();
+//            System.out.println("INORDER");
+        }
+        else if(s.substring(0, s.indexOf(" ")).equals("insert")){
+//            System.out.println("INSERT");
+//            System.out.println(Integer.parseInt(s.substring(s.indexOf(" ")).substring(1)));
+            bst.insert(Integer.parseInt(s.substring(s.indexOf(" ")).substring(1)));
+        }
+        else if(s.substring(0, s.indexOf(" ")).equals("delete")){
+//            System.out.println("DELETE");
+//            System.out.println(Integer.parseInt(s.substring(s.indexOf(" ")).substring(1)));
+            bst.delete(Integer.parseInt(s.substring(s.indexOf(" ")).substring(1)));
+        }
+        else if(s.substring(0, s.indexOf(" ")).equals("find")){
+//            System.out.println("FIND");
+//            System.out.println(Integer.parseInt(s.substring(s.indexOf(" ")).substring(1)));
+            bst.find(Integer.parseInt(s.substring(s.indexOf(" ")).substring(1)));
+        }
+    }
 
 
 
