@@ -242,7 +242,7 @@ public class BST {
                 temporary.parent = null;
                 temporary.right = root.right;
                 temporary.left = root.left;
-                root.left.parent = temporary;
+//                root.left.parent = temporary;
                 root.right.parent = temporary;
                 setRoot(temporary);
             }
@@ -290,9 +290,9 @@ public class BST {
         else if(s.equals("min")){
             bst.min();
         }
-        else if(s.equals("display_tree")){
-            bst.displayTree();
-        }
+//        else if(s.equals("display_tree")){
+//            bst.displayTree();
+//        }
         else if(s.equals("inorder")){
             bst.inorder();
         }
@@ -322,48 +322,48 @@ public class BST {
 
 
 
-    public void displayTree()
-    {
-        Stack<Node> globalStack = new Stack<Node>();
-        globalStack.push(root);
-        int emptyLeaf = 64;
-        boolean isRowEmpty = false;
-        System.out.println("****............................................................................................................****");
-        while(isRowEmpty==false)
-        {
-
-            Stack<Node> localStack = new Stack<Node>();
-            isRowEmpty = true;
-            for(int j=0; j<emptyLeaf; j++)
-                System.out.print(' ');
-            while(globalStack.isEmpty()==false)
-            {
-                Node temp = globalStack.pop();
-                if(temp != null)
-                {
-                    System.out.print(temp.data);
-                    localStack.push(temp.left);
-                    localStack.push(temp.right);
-                    if(temp.left != null ||temp.right != null)
-                        isRowEmpty = false;
-                }
-                else
-                {
-                    System.out.print("--");
-                    localStack.push(null);
-                    localStack.push(null);
-                }
-                for(int j=0; j<emptyLeaf*2-2; j++)
-                    System.out.print(' ');
-            }
-            System.out.println();
-            System.out.println();
-            emptyLeaf /= 2;
-            while(localStack.isEmpty()==false)
-                globalStack.push( localStack.pop() );
-        }
-        System.out.println("****............................................................................................................****");
-    }
+//    public void displayTree()
+//    {
+//        Stack<Node> globalStack = new Stack<Node>();
+//        globalStack.push(root);
+//        int emptyLeaf = 64;
+//        boolean isRowEmpty = false;
+//        System.out.println("****............................................................................................................****");
+//        while(isRowEmpty==false)
+//        {
+//
+//            Stack<Node> localStack = new Stack<Node>();
+//            isRowEmpty = true;
+//            for(int j=0; j<emptyLeaf; j++)
+//                System.out.print(' ');
+//            while(globalStack.isEmpty()==false)
+//            {
+//                Node temp = globalStack.pop();
+//                if(temp != null)
+//                {
+//                    System.out.print(temp.data);
+//                    localStack.push(temp.left);
+//                    localStack.push(temp.right);
+//                    if(temp.left != null ||temp.right != null)
+//                        isRowEmpty = false;
+//                }
+//                else
+//                {
+//                    System.out.print("--");
+//                    localStack.push(null);
+//                    localStack.push(null);
+//                }
+//                for(int j=0; j<emptyLeaf*2-2; j++)
+//                    System.out.print(' ');
+//            }
+//            System.out.println();
+//            System.out.println();
+//            emptyLeaf /= 2;
+//            while(localStack.isEmpty()==false)
+//                globalStack.push( localStack.pop() );
+//        }
+//        System.out.println("****............................................................................................................****");
+//    }
 
 
 }
